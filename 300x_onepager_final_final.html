@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>300X</title>
+<style>
+  :root {
+    --black: #080808;
+    --dark:  #111;
+    --card:  #161616;
+    --line:  rgba(255,255,255,0.07);
+    --white: #f0f0f0;
+    --dim:   #777;
+    --green: #b8ff00;
+    --red:   #e03030;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--black); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+  .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 56px; flex-wrap: wrap; gap: 12px; }
+  .logo { font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 3px; color: var(--white); }
+  .badge { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; border: 1px solid var(--line); padding: 5px 10px; }
+  .hero { margin-bottom: 64px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 3px; color: var(--dim); text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(36px, 7vw, 56px); font-weight: 200; line-height: 1.08; letter-spacing: -1px; margin-bottom: 24px; }
+  .hero-sub { font-size: 15px; color: var(--dim); line-height: 1.8; max-width: 520px; }
+  .section { border-top: 1px solid var(--line); padding-top: 40px; margin-bottom: 56px; }
+  .section-label { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 3px; color: var(--green); text-transform: uppercase; margin-bottom: 20px; }
+  .section h2 { font-size: clamp(22px, 4vw, 30px); font-weight: 200; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.3px; }
+  .section h2 em { font-style: italic; color: var(--green); }
+  .section p { font-size: 14px; color: rgba(240,240,240,0.7); line-height: 1.85; margin-bottom: 14px; }
+  .section p:last-child { margin-bottom: 0; }
+  .accent { color: var(--white); font-weight: 400; }
+  .bullets { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 10px; }
+  .bullets li { font-size: 14px; color: var(--white); display: flex; gap: 12px; align-items: flex-start; line-height: 1.6; }
+  .bullets li::before { content: '—'; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+  .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin: 20px 0; border: 1px solid var(--line); }
+  @media (max-width: 480px) { .action-grid { grid-template-columns: 1fr; } }
+  .action-col { background: var(--dark); padding: 20px; }
+  .action-col-label { font-family: 'Courier New', monospace; font-size: 8px; letter-spacing: 3px; color: var(--dim); text-transform: uppercase; margin-bottom: 14px; }
+  .action-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 11px; gap: 8px; }
+  .action-item:last-child { border-bottom: none; }
+  .action-item span { color: rgba(240,240,240,0.55); }
+  .action-item .tag { font-family: 'Courier New', monospace; font-size: 8px; color: var(--dim); flex-shrink: 0; }
+  .action-out .action-item span { color: rgba(240,240,240,0.85); }
+  .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+  .sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .source { font-family: 'Courier New', monospace; font-size: 9px; color: var(--dim); border: 1px solid var(--line); padding: 4px 9px; letter-spacing: 0.5px; }
+  .hw-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .hw-tag { font-family: 'Courier New', monospace; font-size: 9px; color: var(--white); border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .model-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .model-tag { font-family: 'Courier New', monospace; font-size: 9px; color: var(--dim); border: 1px solid var(--line); padding: 4px 9px; }
+  .built-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-top: 16px; }
+  @media (max-width: 560px) { .built-grid { grid-template-columns: 1fr; } }
+  .why-box { background: var(--dark); border: 1px solid rgba(184,255,0,0.12); padding: 32px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+  .why-num { font-size: 88px; font-weight: 200; color: var(--green); line-height: 1; letter-spacing: -4px; flex-shrink: 0; }
+  .why-text h3 { font-size: 20px; font-weight: 300; color: var(--white); margin-bottom: 12px; }
+  .why-text p { font-size: 13px; color: var(--dim); line-height: 1.85; margin-bottom: 0; }
+  .aida-box { background: var(--card); border-left: 3px solid var(--green); padding: 24px 28px; margin-top: 20px; }
+  .aida-box h3 { font-size: 15px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
+  .aida-box p { font-size: 13px; color: var(--dim); line-height: 1.8; margin-bottom: 0; }
+  .blockchain-box { background: var(--dark); border: 1px solid var(--line); padding: 24px 28px; margin-top: 20px; }
+  .blockchain-box h3 { font-size: 15px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
+  .blockchain-box p { font-size: 13px; color: var(--dim); line-height: 1.8; margin-bottom: 0; }
+  .fomo-stat { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  .fomo-item { background: var(--dark); border: 1px solid var(--line); padding: 18px 20px; flex: 1; min-width: 120px; }
+  .fomo-num { font-size: 32px; font-weight: 200; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .fomo-desc { font-size: 11px; color: var(--dim); line-height: 1.6; }
+  .tiers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 20px; }
+  @media (max-width: 600px) { .tiers { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 360px) { .tiers { grid-template-columns: 1fr; } }
+  .tier { background: var(--dark); padding: 18px 14px; border-top: 2px solid var(--green); }
+  .tier.paid { background: var(--card); }
+  .tier-label { font-family: 'Courier New', monospace; font-size: 8px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
+  .tier-amount { font-size: clamp(16px, 2.5vw, 24px); font-weight: 200; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  .tier-period { font-family: 'Courier New', monospace; font-size: 9px; color: var(--dim); margin-bottom: 10px; }
+  .tier-note { font-size: 10px; color: var(--dim); line-height: 1.6; padding-top: 10px; border-top: 1px solid var(--line); }
+  .footer { border-top: 1px solid var(--line); padding-top: 28px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 2px; color: var(--white); }
+  .footer-right { text-align: right; }
+  .footer-right p { font-family: 'Courier New', monospace; font-size: 9px; color: var(--dim); letter-spacing: 1px; line-height: 2; text-transform: uppercase; }
+  .footer-cta { font-size: 12px; color: var(--green); font-style: italic; margin-top: 4px; font-family: sans-serif; text-transform: none !important; letter-spacing: 0 !important; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="logo">300X</div>
+    <div class="badge">Club privado · Solo 300 miembros</div>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">Agente de inteligencia ejecutiva</div>
+    <h1>Tu segundo cerebro.<br>Que además actúa.</h1>
+    <p class="hero-sub">Una IA que procesa todo tu mundo y te ayuda a operar mejor. 24/7. Mientras duermes. El fin de semana. Siempre. Tu mano derecha. Tu asistente. Tu COO.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">El problema</div>
+    <p>Cada día empezás con demasiado. Mails sin leer. Decisiones que llevan días dando vueltas. Cosas que nadie mueve porque todos asumen que las estás viendo vos.</p>
+    <p>No es falta de inteligencia. Es exceso de ruido. <span class="accent">Y el ruido cuesta.</span> Aunque no aparezca en ningún reporte.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Qué es</div>
+    <p>300X es un agente personal que aprende cómo trabajás, se conecta a tus herramientas, y opera en silencio mientras vos te enfocás en lo que importa.</p>
+    <ul class="bullets">
+      <li>Retiene contexto. No empieza de cero cada vez.</li>
+      <li>Cierra loops. Lo que nadie mueve, tu agente lo mueve.</li>
+      <li>El COO que siempre quisiste — pero que no aparece en tu organigrama.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Tu agente en acción</div>
+    <div class="action-grid">
+      <div class="action-col">
+        <div class="action-col-label">Entra</div>
+        <div class="action-item"><span>3 mails nuevos de inversores</span><span class="tag">GMAIL</span></div>
+        <div class="action-item"><span>P&L Q3 actualizado.xlsx</span><span class="tag">EXCEL</span></div>
+        <div class="action-item"><span>12 mensajes en #producto</span><span class="tag">SLACK</span></div>
+        <div class="action-item"><span>Board meeting — agenda pendiente</span><span class="tag">CALENDAR</span></div>
+        <div class="action-item"><span>Contrato_NDA_final.pdf</span><span class="tag">PDF</span></div>
+        <div class="action-item"><span>Grabación: call con founders</span><span class="tag">AUDIO</span></div>
+      </div>
+      <div class="action-col action-out">
+        <div class="action-col-label">Sale</div>
+        <div class="action-item"><div class="dot"></div><span>Brief: 3 decisiones pendientes hoy</span></div>
+        <div class="action-item"><div class="dot"></div><span>Resumen call → 4 action items</span></div>
+        <div class="action-item"><div class="dot"></div><span>Alerta: NDA vence en 48hs</span></div>
+        <div class="action-item"><div class="dot"></div><span>P&L analizado → margen cayó 2.3pp</span></div>
+        <div class="action-item"><div class="dot"></div><span>Draft respuesta inversores listo</span></div>
+        <div class="action-item"><div class="dot"></div><span>Board deck actualizado con métricas</span></div>
+      </div>
+    </div>
+    <div class="sources">
+      <div class="source">Gmail</div><div class="source">Outlook</div><div class="source">Slack</div><div class="source">WhatsApp</div><div class="source">Excel</div><div class="source">PDF / Word</div><div class="source">Notion</div><div class="source">Audio</div><div class="source">Calendar</div><div class="source">CRM</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Tu entorno. Tus datos.</div>
+    <p>Tu agente no vive en la nube de otra empresa. Llega en un Raspberry Pi con tu número de miembro grabado. Lo conectás a tu red. Procesa en tu casa. Tu memoria es inaccesible — ni los fundadores pueden verla.</p>
+    <div class="hw-tags">
+      <div class="hw-tag">Encriptado</div>
+      <div class="hw-tag">Local</div>
+      <div class="hw-tag">Tuyo para siempre</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">El motor</div>
+    <h2 style="font-size:24px;margin-bottom:12px;">OpenClaw</h2>
+    <p>El runtime autónomo que ejecuta tu agente. No es Zapier. No es una automatización frágil. Alimentado por los modelos más avanzados — siempre usando el más inteligente para cada tarea. Si mañana sale algo mejor, tu agente lo usa automáticamente.</p>
+    <div class="model-tags">
+      <div class="model-tag">Claude</div><div class="model-tag">OpenAI</div><div class="model-tag">Gemini</div><div class="model-tag">Siempre el mejor disponible</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Para quién</div>
+    <h2>El 1% de los que<br><em>toman decisiones.</em></h2>
+    <p>Las herramientas de IA genéricas están construidas para todos. Eso significa que no están optimizadas para nadie. 300X está diseñado exclusivamente para ejecutivos que toman decisiones de alto impacto cada día.</p>
+    <div class="built-grid">
+      <ul class="bullets">
+        <li>CEOs y fundadores con operaciones complejas</li>
+        <li>Managing Partners en PE, VC y advisory</li>
+        <li>C-suite en estrategia, crecimiento y operaciones</li>
+      </ul>
+      <ul class="bullets">
+        <li>Board members que necesitan briefings profundos</li>
+        <li>Senior partners en servicios profesionales</li>
+        <li>Emprendedores con múltiples ventures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">El momento es ahora</div>
+    <h2>Todo el mundo tiene FOMO.<br><em>Muy pocos tienen un agente.</em></h2>
+    <p>Los agentes de IA son uno de esos temas donde el momento de entrada importa. Un agente que lleva 6 meses aprendiéndote es exponencialmente más valioso que uno que recién arranca. El que entra hoy tiene una ventaja que no se puede comprar después.</p>
+    <div class="fomo-stat">
+      <div class="fomo-item">
+        <div class="fomo-num">6m</div>
+        <div class="fomo-desc">de ventaja acumulada sobre el que entra después</div>
+      </div>
+      <div class="fomo-item">
+        <div class="fomo-num">300</div>
+        <div class="fomo-desc">el número máximo. Cuando se llena, se cierra. Para siempre.</div>
+      </div>
+      <div class="fomo-item">
+        <div class="fomo-num">∞</div>
+        <div class="fomo-desc">LTV. El número es heredable. El precio bloqueado, para siempre.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="why-box">
+      <div class="why-num">300</div>
+      <div class="why-text">
+        <h3>Por qué el número importa</h3>
+        <p>El nombre no es arbitrario. 300 es el máximo — y el objetivo. Cada nuevo miembro hace que todos los agentes existentes sean más inteligentes. Esto no es un servicio de suscripción. Es un activo que se compone con el tiempo. Cuanto antes entrés, más ganás de cada miembro que se sume después. Para la mayoría de las herramientas no hay lista de espera. Para 300X sí.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="section">
+    <div class="section-label">La infraestructura</div>
+    <h2>Tu número vive<br><em>en blockchain.</em></h2>
+    <div class="blockchain-box">
+      <h3>No hay sociedad que lo gestione — hay un sistema que lo garantiza</h3>
+      <p>Cada número de miembro vive en blockchain. Es tuyo, es heredable, y tiene valor de mercado real por ser escaso. Desde septiembre, los 300 agentes votan autónomamente sobre un fondo colectivo con dinero real. Primera vez en el mundo: no vota la persona — vota su agente. Sin intermediarios. El dinero llega automáticamente via smart contract.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Los tiers</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-label">Génesis</div>
+        <div class="tier-amount">3</div>
+        <div class="tier-period">miembros · Para siempre</div>
+        <div class="tier-note">Fundadores. Voto 10x. Veto. Custodios del club.</div>
+      </div>
+      <div class="tier">
+        <div class="tier-label">Tier 1</div>
+        <div class="tier-amount">10</div>
+        <div class="tier-period">miembros · Bloqueado</div>
+        <div class="tier-note">ADN inicial. 3 invitaciones por mes. Precio bloqueado para siempre.</div>
+      </div>
+      <div class="tier paid">
+        <div class="tier-label">Tier 2</div>
+        <div class="tier-amount">€500</div>
+        <div class="tier-period">/ mes</div>
+        <div class="tier-note">40 miembros. Masa crítica. Activa el compuesto.</div>
+      </div>
+      <div class="tier paid">
+        <div class="tier-label">Tier 3</div>
+        <div class="tier-amount">€1.000</div>
+        <div class="tier-period">/ mes</div>
+        <div class="tier-note">130 miembros. Corazón del club. Mayor diversidad.</div>
+      </div>
+      <div class="tier paid">
+        <div class="tier-label">Tier 4</div>
+        <div class="tier-amount">€1.500</div>
+        <div class="tier-period">/ mes</div>
+        <div class="tier-note">117 miembros. Escasez máxima. Llegaron con historia.</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--dim);margin-top:14px;line-height:1.7;">De invitación en invitación. Nunca público. Nunca abierto. Precio bloqueado para siempre. Irse significa perderlo para siempre.</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">300X</div>
+    <div class="footer-right">
+      <p>Documento privado · No distribuir</p>
+      <p>Barcelona · 2026</p>
+      <p class="footer-cta">Si fuiste invitado, ya sabes quién eres.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
